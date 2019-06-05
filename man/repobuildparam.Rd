@@ -32,7 +32,7 @@ RepoBuildParam(basedir, repo_name = "current",
   paste0("gran", repo_name, "@localhost"), unsubscribers = NULL),
   repo_archive = file.path(destination, repo_name, "src", "contrib",
   "Archive"), repo_metadata_dir = file.path(destination, repo_name, "src",
-  "contrib", "Meta"), make_windows_bins = TRUE)
+  "contrib", "Meta"), make_windows_bins = TRUE, clear_staging_postbuild = TRUE)
 }
 \arguments{
 \item{name}{Name of the package}

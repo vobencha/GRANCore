@@ -44,6 +44,7 @@
 #' email_notify(repo)
 #' ## miscellaneous
 #' make_windows_bins(repo)
+#' clear_staging_postbuild(repo)
 #' use_cran_granbase(repo)
 #' check_timeout(repo)
 #' build_timeout(repo)
@@ -133,12 +134,25 @@ setMethod("repobase", "GRANRepository", function(repo) {
 
 
 #' staging
-#' Return the staging directory or the staging_logs to be used when building
-#' the repository. If the directory does not exist it will be created.
+#'
+#' Accessors for the staging directory used when building the repository.
+#'
+#' \code{staging} returns the location of the staging directory. If the 
+#' directory does not exist it will be created. \code{staging_logs} returns 
+#' the location of the staging logs. \code{clear_staging_postbuild}
+#' and \code{clear_staging_postbuild<-} get or set the logical specifying
+#' if the staging directory should be cleared of all intermediate build 
+#' products when the builds complete. 
+#' As of GRANBase >= 2.6.7, the staging repo is cleared in makeRepo() 
+#' before a new build run starts. By default, \code{clear_staging_postbuild=TRUE}
+#' which means the staging repo is cleared both at the start and end of the
+#' build run. It is useful to set \code{clear_staging_postbuild=FALSE} when
+#' troubleshooting build problems and retaining the the intermediate products
+#' may be informative.
 #'
 #' @rdname staging-methods
 #' @param repo a GRANRepository object
-#' @return The path to the repository specific directory
+#' @return The path to the repository specific staging directory
 #' @export
 setGeneric("staging", function(repo) standardGeneric("staging"))
 #' @rdname staging-methods
@@ -151,7 +165,7 @@ setMethod("staging", "GRANRepository", function(repo) {
 })
 
 #' @rdname staging-methods
-#' @return The path to the repository specific directory
+#' @return The path to the repository specific staging logs
 #' @export
 setGeneric("staging_logs", function(repo) standardGeneric("staging_logs"))
 #' @rdname staging-methods
@@ -163,6 +177,21 @@ setMethod("staging_logs", "GRANRepository", function(repo) {
     normalizePath2(ret)
 })
 
+#' @rdname staging-methods
+#' @return Logical indicating whether the staging repo will be cleared after the builds complete.
+#' @export
+setGeneric("clear_staging_postbuild", function(repo) standardGeneric("clear_staging_postbuild"))
+#' @rdname staging-methods
+#' @aliases clear_staging_postbuild,GRANRepository-method
+#' @export
+setMethod("clear_staging_postbuild", "GRANRepository",
+          function(repo) param(repo)@clear_staging_postbuild )
+
+setMethod("clear_staging_postbuild<-", "GRANRepository",
+          function(x, value ) {
+              param(x)@clear_staging_postbuild = value
+              x
+          })
 
 #' temporary library
 #'
