@@ -206,8 +206,6 @@ file location of the full logfile
 }
 \description{
 Accessors
-
-Get or set individual parameters on a GRANRepository object
 }
 \details{
 Set or retrieve the relevant values from a GRANRepository object
@@ -250,6 +248,7 @@ email_options(repo)
 email_notify(repo)
 ## miscellaneous
 make_windows_bins(repo)
+clear_staging_postbuild(repo)
 use_cran_granbase(repo)
 check_timeout(repo)
 build_timeout(repo)

@@ -25,6 +25,7 @@ updateGRANRepoObject <- function(object, ...) {
                            auth = object@auth,
                            email_notifications = object@email_notifications,
                            email_opts = object@email_opts,
+                           clear_staging_postbuild = object@clear_staging_postbuild,
                            ...)
 
     man = PkgManifest(manifest = object@manifest[,names(ManifestRow())])

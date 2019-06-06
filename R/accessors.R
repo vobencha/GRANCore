@@ -151,7 +151,7 @@ setMethod("repobase", "GRANRepository", function(repo) {
 #' may be informative.
 #'
 #' @rdname staging-methods
-#' @param repo a GRANRepository object
+#' @param repo A GRANRepository object
 #' @return The path to the repository specific staging directory
 #' @export
 setGeneric("staging", function(repo) standardGeneric("staging"))
@@ -187,6 +187,16 @@ setGeneric("clear_staging_postbuild", function(repo) standardGeneric("clear_stag
 setMethod("clear_staging_postbuild", "GRANRepository",
           function(repo) param(repo)@clear_staging_postbuild )
 
+#' @rdname staging-methods
+#' @return A GRANRepository object
+#' @param x A GRANRepository object
+#' @param value Logical indicating if staging repo should be cleared after the builds complete.
+#' @return Logical indicating whether the staging repo will be cleared after the builds complete.
+#' @export
+setGeneric("clear_staging_postbuild<-", function(x, value) standardGeneric("clear_staging_postbuild<-"))
+#' @rdname staging-methods
+#' @aliases clear_staging_postbuild<-,GRANRepository-method
+#' @export
 setMethod("clear_staging_postbuild<-", "GRANRepository",
           function(x, value ) {
               param(x)@clear_staging_postbuild = value

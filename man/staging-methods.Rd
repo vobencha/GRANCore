@@ -6,9 +6,11 @@
 \alias{staging,GRANRepository-method}
 \alias{staging_logs}
 \alias{staging_logs,GRANRepository-method}
-\title{staging
-Return the staging directory or the staging_logs to be used when building
-the repository. If the directory does not exist it will be created.}
+\alias{clear_staging_postbuild}
+\alias{clear_staging_postbuild,GRANRepository-method}
+\alias{clear_staging_postbuild<-}
+\alias{clear_staging_postbuild<-,GRANRepository-method}
+\title{staging}
 \usage{
 staging(repo)
 
@@ -17,17 +19,47 @@ staging(repo)
 staging_logs(repo)
 
 \S4method{staging_logs}{GRANRepository}(repo)
+
+clear_staging_postbuild(repo)
+
+\S4method{clear_staging_postbuild}{GRANRepository}(repo)
+
+clear_staging_postbuild(x) <- value
+
+\S4method{clear_staging_postbuild}{GRANRepository}(x) <- value
 }
 \arguments{
-\item{repo}{a GRANRepository object}
+\item{repo}{A GRANRepository object}
+
+\item{x}{A GRANRepository object}
+
+\item{value}{Logical indicating if staging repo should be cleared after the builds complete.}
 }
 \value{
-The path to the repository specific directory
+The path to the repository specific staging directory
 
-The path to the repository specific directory
+The path to the repository specific staging logs
+
+Logical indicating whether the staging repo will be cleared after the builds complete.
+
+A GRANRepository object
+
+Logical indicating whether the staging repo will be cleared after the builds complete.
 }
 \description{
-staging
-Return the staging directory or the staging_logs to be used when building
-the repository. If the directory does not exist it will be created.
+Accessors for the staging directory used when building the repository.
+}
+\details{
+\code{staging} returns the location of the staging directory. If the 
+directory does not exist it will be created. \code{staging_logs} returns 
+the location of the staging logs. \code{clear_staging_postbuild}
+and \code{clear_staging_postbuild<-} get or set the logical specifying
+if the staging directory should be cleared of all intermediate build 
+products when the builds complete. 
+As of GRANBase >= 2.6.7, the staging repo is cleared in makeRepo() 
+before a new build run starts. By default, \code{clear_staging_postbuild=TRUE}
+which means the staging repo is cleared both at the start and end of the
+build run. It is useful to set \code{clear_staging_postbuild=FALSE} when
+troubleshooting build problems and retaining the the intermediate products
+may be informative.
 }

@@ -60,7 +60,11 @@
 #' @param repo_archive Archive directory where older package sources will be saved
 #' @param repo_metadata_dir Directory containing metadata files
 #' @param make_windows_bins Whether to make Windows binary packages
-#' @param clear_staging_postbuild Should build products be deleted from the staging repository after the builds complete. The staging repository is always cleared when the builds start. When FALSE, this option retains intermediate build products useful for troubleshooting.
+#' @param clear_staging_postbuild Logical. Should build products be deleted from the 
+#' staging repository after the builds complete. The staging repository is 
+#' always cleared when the builds start. When this option is set to FALSE,
+#' intermediate build products that may be useful for troubleshooting are
+#' retained.
 #' @rdname repobuildparam
 #' @examples
 #' rbp = RepoBuildParam(basedir = tempdir(), repo_name = "myrepo")

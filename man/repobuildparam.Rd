@@ -10,10 +10,11 @@
 \usage{
 ResultsRow(name = NA_character_, building = TRUE, status = "ok",
   version = "0.0-0", lastAttempt = NA_character_,
-  lastAttemptVersion = NA_character_, lastAttemptStatus = NA_character_,
-  lastbuilt = NA_character_, lastbuiltversion = NA_character_,
-  lastbuiltstatus = NA_character_, buildReason = NA_character_,
-  maintainer = NA_character_, suspended = FALSE)
+  lastAttemptVersion = NA_character_,
+  lastAttemptStatus = NA_character_, lastbuilt = NA_character_,
+  lastbuiltversion = NA_character_, lastbuiltstatus = NA_character_,
+  buildReason = NA_character_, maintainer = NA_character_,
+  suspended = FALSE)
 
 RepoBuildParam(basedir, repo_name = "current",
   temp_repo = file.path(basedir, repo_name, "tmprepo"),
@@ -28,11 +29,12 @@ RepoBuildParam(basedir, repo_name = "current",
   install_test = TRUE, check_test = TRUE, use_cran_granbase = TRUE,
   archive_timing = 2, archive_retries = 2, build_timeout = 10 * 60,
   check_timeout = 15 * 60, email_notifications = FALSE,
-  email_opts = list(smtp_server = "localhost", smtp_port = 25, sender_email =
-  paste0("gran", repo_name, "@localhost"), unsubscribers = NULL),
-  repo_archive = file.path(destination, repo_name, "src", "contrib",
-  "Archive"), repo_metadata_dir = file.path(destination, repo_name, "src",
-  "contrib", "Meta"), make_windows_bins = TRUE, clear_staging_postbuild = TRUE)
+  email_opts = list(smtp_server = "localhost", smtp_port = 25,
+  sender_email = paste0("gran", repo_name, "@localhost"), unsubscribers =
+  NULL), repo_archive = file.path(destination, repo_name, "src",
+  "contrib", "Archive"), repo_metadata_dir = file.path(destination,
+  repo_name, "src", "contrib", "Meta"), make_windows_bins = TRUE,
+  clear_staging_postbuild = TRUE)
 }
 \arguments{
 \item{name}{Name of the package}
@@ -143,6 +145,12 @@ Vector of Perl-style regexes for unsubscribers - defaults to NULL.}
 \item{repo_metadata_dir}{Directory containing metadata files}
 
 \item{make_windows_bins}{Whether to make Windows binary packages}
+
+\item{clear_staging_postbuild}{Logical. Should build products be deleted from the 
+staging repository after the builds complete. The staging repository is 
+always cleared when the builds start. When this option is set to FALSE,
+intermediate build products that may be useful for troubleshooting are
+retained.}
 }
 \value{
 data.frame
